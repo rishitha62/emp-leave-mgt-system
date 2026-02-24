@@ -1,0 +1,1 @@
+package com.example.empleavemgtsystem.dto;\n\npublic class LeaveDecisionRequest {\n    public String comment;\n}\n
