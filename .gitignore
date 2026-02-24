@@ -1,0 +1,24 @@
+# Kind of UNIS failes
+
+target/
+idea/
+log/
+build/
+temp/
+temporary/
+inc/
+out/
+release/
+
+Index:{
+all classes in ./build/
+ all CLASS-generated fim•Ì)ô((¼¨€ˆ(€¨ÉÕ¸İ¥Ñ €É…‘±”œ(€¨±½…°İ¥Ñ €Èğ¨)½ÕĞ¼(¼¨%Ğ™É½´€¹¥Ñ¥¹½É”„((¼¨¹½˜U¹½µÁ¥±•(¨9½Ñ”ì5%9 ‰¥Ñ}½‘”UÍ•Ì(¼¨}¡¥‘‘•¸í%¹Ñ•Éµ•‘¥…Ñ”(¸¨(¼¨½µÁ¥±•	åÑ•Ì°I•Í¥¹ÍÑ…±±%¹Ñ•Éµ••‘Q¡•É”"common
+*.
+gnore/tooltools/
+idea/log/
+
+intles/
+book/
+target/
+example/path/3rc/
+wintons/x/priv/"}
