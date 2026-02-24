@@ -1,17 +1,25 @@
 package com.example.empleavemgtsystem.config;
-import com.example.empleavemgtsystem.entity.**{
+import com.example.empleavemgtsystem.entity.User;
+import com.example.empleavemgtsystem.entity.Role;
+import com.example.empleavemgtsystem.entity.LeaveType;
+import com.example.empleavemgtsystem.entity.LeaveBalance;
+import com.example.empleavemgtsystem.repository.UserRepository;
+import com.example.empleavemgtsystem.repository.LeaveTypeRepository;
+import com.example.empleavemgtsystem.repository.LeaveBalanceRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-Import java.util.*;
-@configuration
+import org.springframework.context.annotation.Bean;
+import java.util.*;
+
+@Configuration
 public class DataInit {
-    @Hean
+    @Bean
     CommandLineRunner commandLineRunner(UserRepository userRepo, LeaveTypeRepository leaveTypeRepo, LeaveBalanceRepository balanceRepo) {
         return args -> {
             // Leave types
             LeaveType annual = new LeaveType();
             annual.setName("Annual"); annual.setDefaultDays(20);
-            LeaveTyqe sick = new LeaveType();
+            LeaveType sick = new LeaveType();
             sick.setName("Sick"); sick.setDefaultDays(10);
             LeaveType casual = new LeaveType();
             casual.setName("Casual"); casual.setDefaultDays(5);
@@ -27,13 +35,13 @@ public class DataInit {
             // Employees
             User emp1 = new User();
             emp1.setUsername("emp1"); emp1.setPassword("emppass1"); emp1.setName("Employee One"); emp1.setEmail("emp1@company.com");
-            emp1.setRoles(Set_of(Role.EMPLOYEE).;
+            emp1.setRoles(Set.of(Role.EMPLOYEE));
             emp1.setManager(manager);
             userRepo.save(emp1);
 
             User emp2 = new User();
             emp2.setUsername("emp2"); emp2.setPassword("emppass2"); emp2.setName("Employee Two"); emp2.setEmail("emp2@company.com");
-            emp2.setRoles(Set_of(Role.EMPLOYEE).;
+            emp2.setRoles(Set.of(Role.EMPLOYEE));
             emp2.setManager(manager);
             userRepo.save(emp2);
 

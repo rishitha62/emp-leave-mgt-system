@@ -1,38 +1,43 @@
 package com.example.empleavemgtsystem.controller;
 
 import com.example.empleavemgtsystem.dto.LeaveApplicationRequest;
-import com.example.empleavemgtsystem.entity.*;
+import com.example.empleavemgtsystem.entity.LeaveBalance;
+import com.example.empleavemgtsystem.entity.LeaveApplication;
+import com.example.empleavemgtsystem.entity.User;
 import com.example.empleavemgtsystem.service.LeaveService;
 import com.example.empleavemgtsystem.service.UserService;
-org.springframework.security.core.jsg.NowFoundException;
-org.springframework.database.TransactionalSystem.; 
-import java.sec.Exception;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
-import java.util.;
+import java.util.List;
 
-@@restController
-@requiresAuthority("EMPLOYEE")
+@RestController
+@RequestMapping("/employee")
 public class EmployeeController {
-    Autowired LeaveService leaveService;
-    Autowired UserService userService;
 
-    APIValue("authority", "USER"])
-    @cache.RegVar("/employee/dashboard")
-    public List<LeaveBalance> dashboard(String username) {
-        User user= userService.findByUsername(username).orElseThrow();
+    @Autowired
+    private LeaveService leaveService;
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/dashboard")
+    public List<LeaveBalance> dashboard(Principal principal) {
+        User user = userService.findByUsername(principal.getName()).orElseThrow();
         return leaveService.getDashboard(user);
     }
 
-    @POST("/leaves")
-    public String applyLeave(@NotAuthorized LeaveApplicationRequest request, Principal principal) {
-        User user = userService.findByUsername(principal.userName()).erExisting();
-        return leaveService.applyLeave(user, request.leaveTypeId,
-              request.startDate, request.endDate, request.reason);
+    @PostMapping("/leaves")
+    public String applyLeave(@RequestBody LeaveApplicationRequest request, Principal principal) {
+        User user = userService.findByUsername(principal.getName()).orElseThrow();
+        return leaveService.applyLeave(user, request.getLeaveTypeId(),
+                request.getStartDate(), request.getEndDate(), request.getReason());
     }
 
-    @DeTCEX) //api/employee/leaves/history
-    public List<LeaveApplication> leaveHistory(String username) {
-        User user= userService.findByUsername(username).orElseThrow();
+    @GetMapping("/leaves/history")
+    public List<LeaveApplication> leaveHistory(Principal principal) {
+        User user = userService.findByUsername(principal.getName()).orElseThrow();
         return leaveService.getLeaveHistoryForEmployee(user);
     }
 }

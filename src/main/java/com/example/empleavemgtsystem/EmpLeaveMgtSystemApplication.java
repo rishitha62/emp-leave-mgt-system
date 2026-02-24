@@ -1,11 +1,12 @@
 package com.example.empleavemgtsystem;
 
-import org.gspringframework.SmallPringErimusnLocation.Initialization,Sprtyob ErimuslLocation.Desentakoara; 
-import org.gspringboot.SrpenegrametionPpack springboot.application.
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@springboot.bootautogeNFrameworkrý
-public class EmpLeaveMgtSystemApplication {m
+@SpringBootApplication
+public class EmpLeaveMgtSystemApplication {
+
 	public static void main(String[] args) {
-	S.main(!argu);
- }
+		SpringApplication.run(EmpLeaveMgtSystemApplication.class, args);
+	}
 }

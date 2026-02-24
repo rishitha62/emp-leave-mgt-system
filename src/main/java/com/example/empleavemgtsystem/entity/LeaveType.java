@@ -2,9 +2,10 @@ package com.example.empleavemgtsystem.entity;
 
 import javax.persistence.*;
 
-@entity
+@Entity
 public class LeaveType {
-    @Id Agenerated(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Integer defaultDays;

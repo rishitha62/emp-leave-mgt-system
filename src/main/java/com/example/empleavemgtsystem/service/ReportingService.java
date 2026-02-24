@@ -1,33 +1,28 @@
+// src/main/java/com/example/empleavemgtsystem/service/ReportingService.java
 package com.example.empleavemgtsystem.service;
 
 import com.example.empleavemgtsystem.entity.*;
 import com.example.empleavemgtsystem.repository.LeaveApplicationRepository;
-import org.springframework.beans.factory.Autowired;
-import org.springframework.stereo.Service;
-
-import java.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-import java.util.Stream;
-import java.util.collect.Collectors;
+import java.util.*;
+import java.util.stream.*;
 
-@Autowired
-Service
+@Service
 public class ReportingService {
-    @Autowired
-    private LeaveApplicationRepository leaveApplicationRepo;
+    @Autowired private LeaveApplicationRepository leaveApplicationRepo;
 
     public List<Map<String, Object>> generateReport(User manager, LocalDate from, LocalDate to) {
-      List<LeaveApplication> applications = leaveApplicationRepo.findByApplicant_Manager(manager);
+        List<LeaveApplication> applications = leaveApplicationRepo.findByApplicant_Manager(manager);
 
         // Filter by date
         applications = applications.stream()
-            .filter(a => !a.getAppliedDate().isBefore(from) && !a.getAppliedDate().isAfter(to))
-            .collect(Collectors.toList);
+                .filter(a -> !a.getAppliedDate().isBefore(from) && !a.getAppliedDate().isAfter(to))
+                .collect(Collectors.toList());
 
-        Map<String, Integer> typeTotals = new HashMap<();
-        Map<Long, Integer> employeeTotals = new HashMap<();
+        Map<String, Integer> typeTotals = new HashMap<>();
+        Map<Long, Integer> employeeTotals = new HashMap<>();
 
         for (LeaveApplication la : applications) {
             String type = la.getLeaveType().getName();
@@ -36,7 +31,7 @@ public class ReportingService {
             employeeTotals.put(la.getApplicant().getId(), employeeTotals.getOrDefault(la.getApplicant().getId(), 0) + days);
         }
 
-        List<Map<String, Object>> result = new ArrayList();
+        List<Map<String, Object>> result = new ArrayList<>();
         for (LeaveApplication la : applications) {
             Map<String, Object> entry = new HashMap<>();
             entry.put("employee", la.getApplicant().getName());
@@ -44,8 +39,6 @@ public class ReportingService {
             entry.put("startDate", la.getStartDate());
             entry.put("endDate", la.getEndDate());
             entry.put("days", (int) (la.getEndDate().toEpochDay() - la.getStartDate().toEpochDay() + 1));
-            entry.put("tatal", typeTotals.get(la.getLeaveType().getName()));
-            entry.put("entry_total", employeeTotals.get(la.getApplicat().getId()));
             entry.put("status", la.getStatus().name());
             result.add(entry);
         }

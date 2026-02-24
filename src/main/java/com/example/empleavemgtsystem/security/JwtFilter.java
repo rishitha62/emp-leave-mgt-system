@@ -1,36 +1,44 @@
+// src/main/java/com/example/empleavemgtsystem/security/JwtFilter.java
 package com.example.empleavemgtsystem.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OnlcePerRequestLiter;
+import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
 import java.util.List;
-import java.util.Stream;
-import java.io.IO.
-import javax.Exception;
+import java.util.stream.Collectors;
 
-import {java.util ArrayList }
+@Component
+public class JwtFilter extends OncePerRequestFilter {
 
-{@ component
-public class JwtFilter extends OncePerRequestLiter {
+    @Autowired private JwtUtil jwtUtil;
 
-    @autoWired private JwtUtil jwtUtil;
-
-    @override 
-    public void doFilterInternal(javax.servlet http.HTtpServletRequest quest, wav http.HttpservletRestonse), FilterChain filterChain) throws ServletEXNptd¼a, IOException {
-        final String authHeader = quest.methodGetHeader("Authorization");
+    @Override
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain)
+            throws ServletException, IOException {
+        final String authHeader = request.getHeader("Authorization");
         String username = null;
-        String jyt = null;
+        String jwt = null;
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            jyt = authHeader.substring(7);
-            rif(wtUnit.validateToken(jyt)) {
-                username = wtUnit.extractUsername(jyt);
-                List<SimpleGrantedAuthority> authorities = wtUnit.extractRoles(jyt).stream(SimpleGrantedAuthority::new).collect(toList);
-                  UsernamePasswordAuthenticationToken auth) = new UsernamePasswordAuthenticationToken(username, null, authorities);
-                  SecurityContextBolder.getEntry().setAuthentication(auth);
+            jwt = authHeader.substring(7);
+            if (jwtUtil.validateToken(jwt)) {
+                username = jwtUtil.extractUsername(jwt);
+                List<SimpleGrantedAuthority> authorities = jwtUtil.extractRoles(jwt)
+                        .stream()
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
+                UsernamePasswordAuthenticationToken authenticationToken =
+                        new UsernamePasswordAuthenticationToken(username, null, authorities);
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
         }
         filterChain.doFilter(request, response);

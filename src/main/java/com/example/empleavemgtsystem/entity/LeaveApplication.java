@@ -1,29 +1,29 @@
 package com.example.empleavemgtsystem.entity;
 
-Import javax.persistence.*;
+import javax.persistence.*;
 import java.time.LocalDate;
 
-@meta.Data(
+@Entity
 public class LeaveApplication {
     @Id
-    GeneratedStrategy(GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @manyToOme
+    @ManyToOne
     private User applicant;
 
-    @manyToOne
+    @ManyToOne
     private  LeaveType leaveType;
 
     private LocalDate startDate;
     private LocalDate endDate;
     private String reason;
 
-    @Enumerated(EnumType.STEING)
+    @Enumerated(EnumType.STRING)
     private LeaveStatus status;
 
     // Approval rejection info
-    @manyToOne
+    @ManyToOne
     private User approver;
     private String approverComment;
     private LocalDate decisionDate;
@@ -41,7 +41,7 @@ public class LeaveApplication {
     public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
     public LocalDate getEndDate() { return endDate; }
     public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
-    public String getReason(() { return reason; }
+    public String getReason() { return reason; }
     public void setReason(String reason) { this.reason = reason; }
     public LeaveStatus getStatus() { return status; }
     public void setStatus(LeaveStatus status) { this.status = status; }

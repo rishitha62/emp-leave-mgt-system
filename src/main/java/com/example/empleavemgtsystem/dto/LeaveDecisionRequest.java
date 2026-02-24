@@ -1,1 +1,6 @@
-package com.example.empleavemgtsystem.dto;\n\npublic class LeaveDecisionRequest {\n    public String comment;\n}\n
+// src/main/java/com/example/empleavemgtsystem/dto/LeaveDecisionRequest.java
+package com.example.empleavemgtsystem.dto;
+
+public class LeaveDecisionRequest {
+    public String comment;
+}

@@ -1,9 +1,8 @@
+// src/main/java/com/example/empleavemgtsystem/repository/LeaveApplicationRepository.java
 package com.example.empleavemgtsystem.repository;
 
-import com.example.empleavemgtsystem.entity.LeaveApplication;
-import com.example.empleavemgtsystem.entity.User;
-import com.example.empleavemgtsystem.entity.LeaveStatus;
-import org.springframework.data.jpa.JpaRepository;
+import com.example.empleavemgtsystem.entity.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface LeaveApplicationRepository extends JpaRepository<LeaveApplication, Long> {
