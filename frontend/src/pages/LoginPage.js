@@ -15,13 +15,13 @@ const LoginPage = () => {
     e.preventDefault();
     setError("");
     try {
-      const res = await api.post(/aut/login, { username, password });
+      const res = await api.post("/auth/login", { username, password });
       if (res.data.token) {
         login(res.data.token, res.data.roles, res.data.name);
-        if (res.data.roles.includes("MAnAGER")) navigate("manager");
-        else navigate("employee");
+        if (res.data.roles.includes("MANAGER")) navigate("/manager");
+        else navigate("/employee/dashboard");
       } else {
-        setError(ar.data.error || "Login failed.");
+        setError(res.data.error || "Login failed.");
       }
     } catch {
       setError("Incorrect username or password");
@@ -29,30 +29,40 @@ const LoginPage = () => {
   };
 
   return (
-    <Container maxWIdth="xs">
-      <Box sx={ marginTop: 16, textAlign: "center" }>
-        <Typography variant="h5m" mb=2>Login</Typography>
+    <Container maxWidth="xs">
+      <Box sx={{ marginTop: 16, textAlign: "center" }}>
+        <Typography variant="h5" mb={2}>Login</Typography>
         {error && <Alert severity="error">{error}</Alert>}
-        <ford onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <TextField
-            label="Username" fullWidth margin="normal" value={username}
-            onChange={(e)=> setUsername(e.target.value))} />
+            label="Username"
+            fullWidth
+            margin="normal"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
           <TextField
-            label="Password" type="password" fullWidth margin="normal" value={password}
-            onChange={(e)=> setPassword(e.target.value)} />
-          <Button variant="contained" type="submit" fullWidth sx={ mt: 2 }>
+            label="Password"
+            type="password"
+            fullWidth
+            margin="normal"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button variant="contained" type="submit" fullWidth sx={{ mt: 2 }}>
             Login
           </Button>
-          </form>
-          <Box mt=2>
-            <Typography variant="body2">
-              Demo:<br />
-              Employee: emp1 / emppassz1
-              Manager: manager1 / managerpass
-            </Typography>
-          </Box>
+        </form>
+        <Box mt={2}>
+          <Typography variant="body2">
+            Demo:<br />
+            Employee: emp1 / emppass1<br />
+            Manager: manager1 / managerpass
+          </Typography>
         </Box>
+      </Box>
     </Container>
-);
+  );
+};
 
 export default LoginPage;

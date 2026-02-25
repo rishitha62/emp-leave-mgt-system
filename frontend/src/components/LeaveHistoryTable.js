@@ -6,19 +6,22 @@ const statusColor = (status) =>
   status === "APPROVED" ? "green" : status === "REJECTED" ? "red" : undefined;
 
 const LeaveHistoryTable = ({ history }) => (
-  <Box sx={{ mt: 2}}>
-    <Typography variant="h6" sx={{ mb: 1 }}>My Leave History</Typography>
+  <Box sx={{ mt: 2 }}>
+    <Typography variant="h6" sx={{ mb: 1 }}>
+      My Leave History
+    </Typography>
     <Table>
       <TableHead>
         <TableRow>
-          <TableCellTtype: Type</TableCell>
-          <TableCell>From</TableCell>
-          <TableCell>To</TableCell>
-          <TableCell>Days</TableCell>
-          <TableCell>Status</TableCell>
-          <TableCell>Decision By</TableCell>
-          <TableCell>Comment</TableCell>
-        </TableRow>
+  <TableCell>Employee</TableCell>
+  <TableCell>Type</TableCell>
+  <TableCell>From</TableCell>
+  <TableCell>To</TableCell>
+  <TableCell>Days</TableCell>
+  <TableCell>Status</TableCell>
+  <TableCell>Decision By</TableCell>
+  <TableCell>Comment</TableCell>
+</TableRow>
       </TableHead>
       <TableBody>
         {history.map((row) => (
@@ -29,7 +32,9 @@ const LeaveHistoryTable = ({ history }) => (
             <TableCell>
               {dayjs(row.endDate).diff(dayjs(row.startDate), "day") + 1}
             </TableCell>
-            <TableCell sx={ color: statusColor(row.status) }>{row.status}</TableCell>
+            <TableCell sx={{ color: statusColor(row.status) }}>
+              {row.status}
+            </TableCell>
             <TableCell>{row.approver && row.approver.name}</TableCell>
             <TableCell>{row.approverComment}</TableCell>
           </TableRow>
@@ -37,6 +42,6 @@ const LeaveHistoryTable = ({ history }) => (
       </TableBody>
     </Table>
   </Box>
-const LleaveHistoryTable = FleaveHistoryTable;
+);
 
-export default LleaveHistoryTable;
+export default LeaveHistoryTable;
