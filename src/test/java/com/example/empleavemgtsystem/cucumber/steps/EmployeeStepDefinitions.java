@@ -101,7 +101,7 @@ public class EmployeeStepDefinitions {
 
     @Then("the leave application response should be {string}")
     public void verifyLeaveResponse(String expected) {
-        String actual = state.lastResponse.replace("\"", "").replace(""", "").trim();
+        String actual = state.lastResponse.replace("\"", "").replace("\"", "").trim();
         Assertions.assertEquals(expected, actual);
     }
 
